@@ -15,6 +15,7 @@
     tools:context=".TimelineActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTweets"
         android:layout_width="412dp"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
