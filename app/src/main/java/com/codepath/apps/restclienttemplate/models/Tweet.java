@@ -8,12 +8,30 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.parceler.Parcel;
 
+@Parcel
 public class Tweet {
     public String body;
     public String createdAt;
     public User user;
     public long id;
+
+    public String getBody() {
+        return body;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public long getId() {
+        return id;
+    }
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
@@ -35,5 +53,9 @@ public class Tweet {
 
     public static String getFormattedTime(String createdAt) {
         return TimeFormatter.getTimeDifference(createdAt);
+    }
+
+    public static String getDateTime(String createdAt) {
+        return TimeFormatter.getTimeStamp(createdAt);
     }
 }
