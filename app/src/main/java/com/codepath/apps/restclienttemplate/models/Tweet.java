@@ -58,4 +58,6 @@ public class Tweet {
     public static String getDateTime(String createdAt) {
         return TimeFormatter.getTimeStamp(createdAt);
     }
+
+    public Tweet(){}
 }
