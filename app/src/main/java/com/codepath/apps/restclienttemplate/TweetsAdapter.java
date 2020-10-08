@@ -3,12 +3,14 @@ package com.codepath.apps.restclienttemplate;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
@@ -22,6 +24,7 @@ import com.codepath.apps.restclienttemplate.models.Tweet;
 import org.parceler.Parcels;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
 
@@ -91,6 +94,15 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvBody.setText(tweet.body);
             tvUserName.setText(tweet.user.name);
             tvScreenName.setText("@" + tweet.user.screenName);
+            /*new PatternEditableBuilder().
+                    addPattern(Pattern.compile("\\@(\\w+)"), Color.BLUE,
+                            new PatternEditableBuilder.SpannableClickedListener() {
+                                @Override
+                                public void onSpanClicked(String text) {
+                                    Toast.makeText(MainActivity.this, "Clicked username: " + text,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }).into(textView);*/
             tvTime.setText(tweet.getFormattedTime(tweet.createdAt));
             Glide.with(context).load(tweet.user.profileImageUrl).circleCrop().into(ivProfileImage);
 
