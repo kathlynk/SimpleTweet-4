@@ -2,7 +2,7 @@
 
 **Simple Tweet** is an android app that allows a user to view his Twitter timeline. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **6** hours spent in total
+Time spent: **10** hours spent in total
 
 ## User Stories
 
@@ -30,7 +30,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [X] I did not have time to fully match the colors and styles of Twitter, but I tried to match some.  For example, the detail view has a circle image and there is a guideline between each post in the timelime view.  I also added a toolbar with a functional "back" button to the detail view to match the Twitter set up.
 
 ## Video Walkthrough
 
@@ -42,7 +42,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I had trouble getting set up with a Twitter Developer account for a bit.  Once that was squared away, I didn't have any real issues.
 
 ## Open-source libraries used
 
