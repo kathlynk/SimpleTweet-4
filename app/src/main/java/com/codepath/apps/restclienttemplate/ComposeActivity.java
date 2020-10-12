@@ -1,8 +1,5 @@
 package com.codepath.apps.restclienttemplate;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,8 +9,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -25,13 +26,13 @@ import okhttp3.Headers;
 
 public class ComposeActivity extends AppCompatActivity {
 
+    TwitterClient client;
     public static final int MAX_LEN = 280;
     public static final String TAG = "ComposeActivity";
     EditText etCompose;
     TextView tvCount;
     Button btnTweet;
 
-    TwitterClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,11 @@ public class ComposeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_compose);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Compose");
-
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear);
+        
         client = TwitterApp.getRestClient(this);
-
         etCompose = findViewById(R.id.etCompose);
         tvCount = findViewById(R.id.tvCount);
         etCompose.addTextChangedListener(new TextWatcher() {
@@ -50,7 +52,7 @@ public class ComposeActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Fires right as the text is being changed (even supplies the range of text)
                 int num = 280 - s.length();
-                if (num < 0){
+                if (num < 0) {
                     tvCount.setText(getResources().getString(R.string.too_long));
                     tvCount.setTextColor(Color.RED);
                 } else {
@@ -76,7 +78,7 @@ public class ComposeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final String tweetContent = etCompose.getText().toString();
-                if (tweetContent.isEmpty()){
+                if (tweetContent.isEmpty()) {
                     Toast.makeText(ComposeActivity.this, "Sorry, the tweet cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -90,12 +92,12 @@ public class ComposeActivity extends AppCompatActivity {
                         Log.i(TAG, "onSuccess published tweet");
                         try {
                             Tweet tweet = Tweet.fromJson(json.jsonObject);
-                            Log.i(TAG, "tweet data is: "+ tweet);
+                            Log.i(TAG, "tweet data is: " + tweet);
                             Intent i = new Intent();
                             i.putExtra("tweet", Parcels.wrap(tweet));
                             setResult(RESULT_OK, i);
                             finish();
-                        } catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -109,4 +111,12 @@ public class ComposeActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // close this activity as oppose to navigating up
+
+        return false;
+    }
+
 }

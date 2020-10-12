@@ -1,5 +1,12 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,13 +14,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.TweetDao;
@@ -34,6 +34,7 @@ public class TimelineActivity extends AppCompatActivity {
 
     public static final String TAG = "TimelineActivity";
     public static final int REQUEST_CODE = 36;
+    private User user;
     TwitterClient client;
     RecyclerView rvTweets;
     List<Tweet> tweets;
@@ -105,6 +106,7 @@ public class TimelineActivity extends AppCompatActivity {
         });
         populateHomeTimeline();
     }
+
 
     // this is where we will make another API call to get the next page of tweets and add the objects to our current list of tweets
     public void loadMoreData() {

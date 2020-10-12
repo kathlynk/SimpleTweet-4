@@ -27,6 +27,8 @@
             android:id="@+id/TILetCompose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             app:counterEnabled="false"
             app:counterMaxLength="280">
 
@@ -34,11 +36,12 @@
                 android:id="@+id/etCompose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="What do you want to share?"
+                android:hint="What's happening?"
                 android:inputType="textMultiLine"
                 android:minLines="5" />
 
