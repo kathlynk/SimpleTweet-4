@@ -51,7 +51,7 @@
             android:layout_below="@+id/TILetCompose"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="5dp"
-            android:text="280"
+            android:text="280/280"
             tools:text="280" />
 
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -49,8 +50,13 @@ public class ComposeActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 // Fires right as the text is being changed (even supplies the range of text)
                 int num = 280 - s.length();
-                if (num < 0){ num = 0; }
-                tvCount.setText(String.valueOf(num));
+                if (num < 0){
+                    tvCount.setText(getResources().getString(R.string.too_long));
+                    tvCount.setTextColor(Color.RED);
+                } else {
+                    tvCount.setText(String.valueOf(num) + getResources().getString(R.string.out_of));
+                    tvCount.setTextColor(Color.BLACK);
+                }
             }
 
             @Override
