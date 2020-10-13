@@ -25,7 +25,7 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 		// Sets the Toolbar to act as the ActionBar for this Activity window.
 		// Make sure the toolbar exists in the activity and is not null
 		setSupportActionBar(toolbar);
-		getSupportActionBar().setTitle("Simple Tweet Login");
+		getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
 
 		final SampleModel sampleModel = new SampleModel();
 		sampleModel.setName("CodePath");
