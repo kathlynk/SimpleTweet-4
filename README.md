@@ -17,11 +17,11 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] User is using **"Twitter branded" colors and styles**
+- [X] User is using **"Twitter branded" colors and styles**
 - [X] User can **click a link within a tweet body** on tweet details view. The click will launch the web browser with relevant page opened.
 - [ ] User can **select "reply" from detail view to respond to a tweet**
   - [ ] User that wrote the original tweet is **automatically "@" replied in compose**
-- [ ] User can move the "Compose" action to a FloatingActionButton instead of on the AppBar.
+- [X] User can move the "Compose" action to a FloatingActionButton instead of on the AppBar.
 - [ ] Compose tweet functionality is build using modal overlay
 - [X] Use Parcelable instead of Serializable using the popular [Parceler library](http://guides.codepath.org/android/Using-Parceler).
 - [X] User can **open the twitter app offline and see last loaded tweets**. Persisted in SQLite tweets are refreshed on every application launch. While "live data" is displayed when app can get it from Twitter API, it is also saved for use in offline mode.
@@ -37,7 +37,8 @@ The following **bonus** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [X] User is warned when tweet length is more than 280 by text turning red
+- [X] Launcher icon updated to Twitter icon
 
 ## Video Walkthrough
 
@@ -51,7 +52,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I spent a lot of time playing around with different layouts to get the styling I wanted.
 
 ## Open-source libraries used
 

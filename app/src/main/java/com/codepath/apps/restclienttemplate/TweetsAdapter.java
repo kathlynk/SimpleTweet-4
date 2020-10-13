@@ -111,11 +111,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 public void onClick(View v) {
                     Intent i = new Intent(context, DetailActivity.class);
                     i.putExtra("tweet", Parcels.wrap(tweet));
-                    //Pair<View, String> p1 = Pair.create((View)tvBody, "bodyContent");
-                    //Pair<View, String> p2 = Pair.create((View)tvUserName, "userName");
-                    //ActivityOptionsCompat options = ActivityOptionsCompat.
-                            //makeSceneTransitionAnimation((Activity) context, p1, p2);
-                    context.startActivity(i/*,options.toBundle()*/);
+                    context.startActivity(i);
                 }
             });
         }
