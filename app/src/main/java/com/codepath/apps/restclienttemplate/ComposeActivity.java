@@ -1,8 +1,11 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -13,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -32,6 +36,7 @@ public class ComposeActivity extends AppCompatActivity {
     EditText etCompose;
     TextView tvCount;
     Button btnTweet;
+    SharedPreferences pref;
 
 
     @Override
@@ -44,9 +49,17 @@ public class ComposeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear);
 
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        String s = pref.getString("tweetDraft", "");
+
         client = TwitterApp.getRestClient(this);
         etCompose = findViewById(R.id.etCompose);
         tvCount = findViewById(R.id.tvCount);
+        if (s != "") {
+            etCompose.setText(s);
+            int num = 280 - s.length();
+            tvCount.setText(String.valueOf(num) + getResources().getString(R.string.out_of));
+        }
         etCompose.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -62,14 +75,10 @@ public class ComposeActivity extends AppCompatActivity {
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // Fires right before text is changing
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                // Fires right after the text has changed
-            }
+            public void afterTextChanged(Editable s) { }
         });
         btnTweet = findViewById(R.id.btnTweet);
 
@@ -96,6 +105,9 @@ public class ComposeActivity extends AppCompatActivity {
                             Intent i = new Intent();
                             i.putExtra("tweet", Parcels.wrap(tweet));
                             setResult(RESULT_OK, i);
+                            SharedPreferences.Editor edit = pref.edit();
+                            edit.putString("tweetDraft", "");
+                            edit.commit();
                             finish();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -114,8 +126,37 @@ public class ComposeActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        finish(); // close this activity as oppose to navigating up
+        final String s = etCompose.getText().toString();
+        if (s.length() != 0) {
 
+            AlertDialog.Builder ad = new AlertDialog.Builder(this);
+            ad.setTitle("Text Exists");
+            ad.setMessage("Do you wish to save this draft? ");
+
+            ad.setPositiveButton("Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            SharedPreferences.Editor edit = pref.edit();
+                            edit.putString("tweetDraft", s);
+                            edit.commit();
+                            finish();
+                        }
+                    });
+
+            ad.setNeutralButton("No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            SharedPreferences.Editor edit = pref.edit();
+                            edit.putString("tweetDraft", "");
+                            edit.commit();
+                            finish();
+                        }
+                    });
+
+            ad.show();
+        } else {
+            finish();
+        }
         return false;
     }
 
