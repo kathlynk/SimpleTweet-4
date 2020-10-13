@@ -43,7 +43,7 @@ public class ComposeActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_clear);
-        
+
         client = TwitterApp.getRestClient(this);
         etCompose = findViewById(R.id.etCompose);
         tvCount = findViewById(R.id.tvCount);
@@ -83,7 +83,7 @@ public class ComposeActivity extends AppCompatActivity {
                     return;
                 }
                 if (tweetContent.length() > MAX_LEN) {
-                    Toast.makeText(ComposeActivity.this, "Tweet must be 140 char or less", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ComposeActivity.this, "Tweet must be 280 char or less", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 client.publishTweet(tweetContent, new JsonHttpResponseHandler() {
